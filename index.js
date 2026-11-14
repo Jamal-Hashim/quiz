@@ -340,7 +340,55 @@ function loadQuestion() {
 
         button.addEventListener("click", function () {
 
-            checkAnswer(button, option, currentQuiz.answer);
+            checkAnswer(button, option, currentfunction checkAnswer(selectedBtn, selectedAnswer, correctAnswer) {
+
+    if (answered) return;
+
+    answered = true;
+
+    const allOptions = document.querySelectorAll(".option");
+
+    allOptions.forEach(button => {
+
+        button.disabled = true;
+
+        const optionText = button.lastElementChild.textContent;
+
+        if (optionText === correctAnswer) {
+            button.classList.add("correct");
+        }
+
+    });
+
+    if (selectedAnswer === correctAnswer) {
+
+        score++;
+
+        selectedBtn.classList.add("selected");
+
+        answerStatus.textContent = "✓ Correct Answer!";
+
+        answerStatus.className = "correct-text";
+
+    } else {
+
+        selectedBtn.classList.add("wrong");
+
+        answerStatus.textContent = "✗ Wrong Answer!";
+
+        answerStatus.className = "wrong-text";
+
+    }
+
+    scoreEl.textContent = score;
+
+    // Force enable button
+    nextBtn.removeAttribute("disabled");
+    nextBtn.disabled = false;
+
+    console.log("Button enabled:", !nextBtn.disabled);
+
+                }Quiz.answer);
 
         });
 
@@ -355,63 +403,7 @@ function loadQuestion() {
 // CHECK ANSWER
 // ======================================
 
-function checkAnswer(selectedBtn, selectedAnswer, correctAnswer) {
 
-    // Already Answered
-    if (answered) return;
-
-    answered = true;
-
-    // Get All Options
-    const allOptions = optionsEl.querySelectorAll(".option");
-
-    // Disable Options and Highlight Correct Answer
-    allOptions.forEach(button => {
-
-        button.disabled = true;
-
-        const text = button.lastElementChild.textContent;
-
-        if (text === correctAnswer) {
-
-            button.classList.add("correct");
-
-        }
-
-    });
-
-    // Check Selected Answer
-    if (selectedAnswer === correctAnswer) {
-
-        score++;
-
-        selectedBtn.classList.add("selected");
-
-        answerStatus.textContent = "✓ Correct Answer! Well done.";
-
-        answerStatus.className = "correct-text";
-
-    } else {
-
-        selectedBtn.classList.add("wrong");
-
-        answerStatus.textContent = "✗ Wrong Answer! Correct answer is highlighted.";
-
-        answerStatus.className = "wrong-text";
-
-    }
-
-    // Update Score
-    scoreEl.textContent = score;
-
-    // IMPORTANT: Enable Next Button
-    nextBtn.disabled = false;
-
-    nextBtn.style.opacity = "1";
-
-    nextBtn.style.cursor = "pointer";
-
-}
 
 
 // ======================================
