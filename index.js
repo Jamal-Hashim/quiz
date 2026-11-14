@@ -239,57 +239,44 @@ const quizData = [
 ];
 
 
-// =====================================
+// ======================================
 // DOM ELEMENTS
-// =====================================
+// ======================================
 
 const questionEl = document.getElementById("question");
-
 const optionsEl = document.getElementById("options");
-
 const nextBtn = document.getElementById("nextbtn");
 
 const scoreEl = document.getElementById("score");
-
 const questionCountEl = document.getElementById("question-count");
-
 const progressEl = document.getElementById("progress");
-
 const categoryEl = document.getElementById("question-category");
-
 const answerStatus = document.getElementById("answer-status");
 
 const quizSection = document.getElementById("quiz");
-
 const resultSection = document.getElementById("result-section");
 
 const finalScoreEl = document.getElementById("final-score");
-
 const correctCountEl = document.getElementById("correct-count");
-
 const wrongCountEl = document.getElementById("wrong-count");
-
 const percentageEl = document.getElementById("percentage");
-
 const resultMessageEl = document.getElementById("result-message");
 
 const restartBtn = document.getElementById("restart-btn");
 
 
-// =====================================
+// ======================================
 // QUIZ VARIABLES
-// =====================================
+// ======================================
 
 let currentQuestion = 0;
-
 let score = 0;
-
 let answered = false;
 
 
-// =====================================
+// ======================================
 // LOAD QUESTION
-// =====================================
+// ======================================
 
 function loadQuestion() {
 
@@ -310,51 +297,48 @@ function loadQuestion() {
     // Score
     scoreEl.textContent = score;
 
-    // Progress Bar
+    // Progress
     const progress = ((currentQuestion + 1) / quizData.length) * 100;
-
     progressEl.style.width = `${progress}%`;
 
-    // Clear Old Options
+    // Clear Previous Options
     optionsEl.innerHTML = "";
 
-    // Reset Status
+    // Reset Answer Status
     answerStatus.textContent = "Select an answer to continue";
-
     answerStatus.className = "";
 
-    // Disable Next Button
+    // Disable Next Button for New Question
     nextBtn.disabled = true;
 
+    // Reset button appearance
+    nextBtn.style.opacity = "0.4";
+    nextBtn.style.cursor = "not-allowed";
+
+    // Button Text
     nextBtn.innerHTML = currentQuestion === quizData.length - 1
         ? 'Finish Quiz <span>→</span>'
         : 'Next Question <span>→</span>';
 
-    // Generate Options
+    // Create Options
     currentQuiz.options.forEach((option, index) => {
 
         const button = document.createElement("button");
 
-        button.classList.add("option");
+        button.type = "button";
+        button.className = "option";
 
-        // Create option letter
         const letter = document.createElement("span");
-
-        letter.classList.add("option-letter");
-
+        letter.className = "option-letter";
         letter.textContent = String.fromCharCode(65 + index);
 
-        // Create option text
-        const text = document.createElement("span");
-
-        text.textContent = option;
+        const optionText = document.createElement("span");
+        optionText.textContent = option;
 
         button.appendChild(letter);
+        button.appendChild(optionText);
 
-        button.appendChild(text);
-
-        // Click Event
-        button.addEventListener("click", () => {
+        button.addEventListener("click", function () {
 
             checkAnswer(button, option, currentQuiz.answer);
 
@@ -367,35 +351,34 @@ function loadQuestion() {
 }
 
 
-// =====================================
+// ======================================
 // CHECK ANSWER
-// =====================================
+// ======================================
 
 function checkAnswer(selectedBtn, selectedAnswer, correctAnswer) {
 
-    // Prevent Multiple Clicks
+    // Already Answered
     if (answered) return;
 
     answered = true;
 
-    const allOptions = document.querySelectorAll(".option");
+    // Get All Options
+    const allOptions = optionsEl.querySelectorAll(".option");
 
-    // Disable All Options
+    // Disable Options and Highlight Correct Answer
     allOptions.forEach(button => {
 
         button.disabled = true;
 
-        const optionText = button.lastElementChild.textContent;
+        const text = button.lastElementChild.textContent;
 
-        // Show Correct Answer
-        if (optionText === correctAnswer) {
+        if (text === correctAnswer) {
 
             button.classList.add("correct");
 
         }
 
     });
-
 
     // Check Selected Answer
     if (selectedAnswer === correctAnswer) {
@@ -421,17 +404,21 @@ function checkAnswer(selectedBtn, selectedAnswer, correctAnswer) {
     // Update Score
     scoreEl.textContent = score;
 
-    // Enable Next Button
+    // IMPORTANT: Enable Next Button
     nextBtn.disabled = false;
+
+    nextBtn.style.opacity = "1";
+
+    nextBtn.style.cursor = "pointer";
 
 }
 
 
-// =====================================
+// ======================================
 // NEXT QUESTION
-// =====================================
+// ======================================
 
-nextBtn.addEventListener("click", () => {
+nextBtn.addEventListener("click", function () {
 
     if (!answered) return;
 
@@ -450,9 +437,9 @@ nextBtn.addEventListener("click", () => {
 });
 
 
-// =====================================
-// SHOW FINAL RESULT
-// =====================================
+// ======================================
+// SHOW RESULT
+// ======================================
 
 function showResult() {
 
@@ -460,50 +447,52 @@ function showResult() {
 
     resultSection.classList.remove("hidden");
 
-    // Calculate Result
-    const totalQuestions = quizData.length;
+    const total = quizData.length;
 
-    const wrongAnswers = totalQuestions - score;
+    const wrong = total - score;
 
-    const percentage = Math.round((score / totalQuestions) * 100);
+    const percentage = Math.round((score / total) * 100);
 
-    // Display Result
-    finalScoreEl.textContent = `${score}/${totalQuestions}`;
+    // Display Score
+    finalScoreEl.textContent = `${score}/${total}`;
 
     correctCountEl.textContent = score;
 
-    wrongCountEl.textContent = wrongAnswers;
+    wrongCountEl.textContent = wrong;
 
     percentageEl.textContent = `${percentage}%`;
-
 
     // Result Message
     if (percentage >= 80) {
 
-        resultMessageEl.textContent = "Excellent! You are a Quiz Champion! 🏆";
+        resultMessageEl.textContent =
+            "Excellent! You are a Quiz Champion! 🏆";
 
     } else if (percentage >= 60) {
 
-        resultMessageEl.textContent = "Great Job! Keep Learning! 🎉";
+        resultMessageEl.textContent =
+            "Great Job! Keep Learning! 🎉";
 
     } else if (percentage >= 40) {
 
-        resultMessageEl.textContent = "Good Try! Practice More! 💪";
+        resultMessageEl.textContent =
+            "Good Try! Practice More! 💪";
 
     } else {
 
-        resultMessageEl.textContent = "Keep Practicing! You Can Do It! 🚀";
+        resultMessageEl.textContent =
+            "Keep Practicing! You Can Do It! 🚀";
 
     }
 
 }
 
 
-// =====================================
+// ======================================
 // RESTART QUIZ
-// =====================================
+// ======================================
 
-restartBtn.addEventListener("click", () => {
+restartBtn.addEventListener("click", function () {
 
     currentQuestion = 0;
 
@@ -520,9 +509,8 @@ restartBtn.addEventListener("click", () => {
 });
 
 
-// =====================================
+// ======================================
 // START QUIZ
-// =====================================
+// ======================================
 
 loadQuestion();
-        
