@@ -32,15 +32,6 @@ body {
     color: var(--text);
     font-family: 'Inter', sans-serif;
 }
-#nextbtn {
-    opacity: 1;
-    cursor: pointer;
-}
-
-#nextbtn:disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-}
 
 .quiz-container {
     width: 100%;
@@ -419,7 +410,6 @@ body {
 /* Responsive */
 
 @media (max-width: 500px) {
-
     body {
         padding: 15px 10px;
         align-items: flex-start;
