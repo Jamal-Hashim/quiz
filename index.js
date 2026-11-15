@@ -1,8 +1,6 @@
 
 const quizData = [
-
-    // HTML Questions (1-9)
-
+    // HTML Questions
     {
         category: "HTML",
         question: "Which HTML tag is used to create a hyperlink?",
@@ -18,23 +16,13 @@ const quizData = [
     {
         category: "HTML",
         question: "What is the correct way to create a checkbox in HTML?",
-        options: [
-            "<input type='button'>",
-            "<input type='checkbox'>",
-            "<checkbox>",
-            "<check>"
-        ],
+        options: ["<input type='button'>", "<input type='checkbox'>", "<checkbox>", "<check>"],
         answer: "<input type='checkbox'>"
     },
     {
         category: "HTML",
         question: "Which attribute is used to open a link in a new tab?",
-        options: [
-            "open='_blank'",
-            "target='_blank'",
-            "new='tab'",
-            "tab='new'"
-        ],
+        options: ["open='_blank'", "target='_blank'", "new='tab'", "tab='new'"],
         answer: "target='_blank'"
     },
     {
@@ -68,110 +56,63 @@ const quizData = [
         answer: "<ol>"
     },
 
-    // CSS Questions (10-18)
-
+    // CSS Questions
     {
         category: "CSS",
         question: "Which property is used to change text color in CSS?",
-        options: [
-            "font-color",
-            "color",
-            "text-color",
-            "background-color"
-        ],
+        options: ["font-color", "color", "text-color", "background-color"],
         answer: "color"
     },
     {
         category: "CSS",
         question: "How can you select an element with id 'box' in CSS?",
-        options: [
-            ".box { }",
-            "*box { }",
-            "#box { }",
-            "box { }"
-        ],
+        options: [".box { }", "*box { }", "#box { }", "box { }"],
         answer: "#box { }"
     },
     {
         category: "CSS",
         question: "Which property is used to change background color?",
-        options: [
-            "color",
-            "background",
-            "bgcolor",
-            "background-color"
-        ],
+        options: ["color", "background", "bgcolor", "background-color"],
         answer: "background-color"
     },
     {
         category: "CSS",
         question: "Which CSS property controls the text size?",
-        options: [
-            "font-size",
-            "text-size",
-            "font-style",
-            "size"
-        ],
+        options: ["font-size", "text-size", "font-style", "size"],
         answer: "font-size"
     },
     {
         category: "CSS",
         question: "Which property is used to make text bold in CSS?",
-        options: [
-            "text-weight",
-            "bold",
-            "font-weight",
-            "font-style"
-        ],
+        options: ["text-weight", "bold", "font-weight", "font-style"],
         answer: "font-weight"
     },
     {
         category: "CSS",
         question: "How do you select all elements inside a div in CSS?",
-        options: [
-            "div *",
-            "div.all",
-            "div > all",
-            "div.allElements"
-        ],
+        options: ["div *", "div.all", "div > all", "div.allElements"],
         answer: "div *"
     },
     {
         category: "CSS",
         question: "Which property is used to set spacing between letters?",
-        options: [
-            "letter-spacing",
-            "word-spacing",
-            "text-spacing",
-            "spacing"
-        ],
+        options: ["letter-spacing", "word-spacing", "text-spacing", "spacing"],
         answer: "letter-spacing"
     },
     {
         category: "CSS",
         question: "Which CSS property is used to underline text?",
-        options: [
-            "text-decoration",
-            "underline",
-            "font-style",
-            "line"
-        ],
+        options: ["text-decoration", "underline", "font-style", "line"],
         answer: "text-decoration"
     },
     {
         category: "CSS",
         question: "What is the default position property of HTML elements?",
-        options: [
-            "relative",
-            "absolute",
-            "static",
-            "fixed"
-        ],
+        options: ["relative", "absolute", "static", "fixed"],
         answer: "static"
     },
 
-    // JavaScript Questions (19-26)
-
+    // JavaScript Questions
     {
         category: "JavaScript",
         question: "Which symbol is used for comments in JavaScript?",
@@ -181,12 +122,7 @@ const quizData = [
     {
         category: "JavaScript",
         question: "Which keyword is used to declare a variable in JavaScript (ES6)?",
-        options: [
-            "var",
-            "let",
-            "const",
-            "All of the above"
-        ],
+        options: ["var", "let", "const", "All of the above"],
         answer: "All of the above"
     },
     {
@@ -198,23 +134,13 @@ const quizData = [
     {
         category: "JavaScript",
         question: "Which function is used to parse a string to integer in JavaScript?",
-        options: [
-            "int()",
-            "parseInt()",
-            "parse()",
-            "Number()"
-        ],
+        options: ["int()", "parseInt()", "parse()", "Number()"],
         answer: "parseInt()"
     },
     {
         category: "JavaScript",
         question: "Which method is used to print something in the browser console?",
-        options: [
-            "print()",
-            "console.print()",
-            "console.log()",
-            "log.print()"
-        ],
+        options: ["print()", "console.print()", "console.log()", "log.print()"],
         answer: "console.log()"
     },
     {
@@ -235,14 +161,9 @@ const quizData = [
         options: ["Google", "Netscape", "Microsoft", "Oracle"],
         answer: "Netscape"
     }
-
 ];
 
-
-// ======================================
-// DOM ELEMENTS
-// ======================================
-
+// DOM Elements
 const questionEl = document.getElementById("question");
 const optionsEl = document.getElementById("options");
 const nextBtn = document.getElementById("nextbtn");
@@ -264,65 +185,40 @@ const resultMessageEl = document.getElementById("result-message");
 
 const restartBtn = document.getElementById("restart-btn");
 
-
-// ======================================
-// QUIZ VARIABLES
-// ======================================
-
+// Quiz Variables
 let currentQuestion = 0;
 let score = 0;
 let answered = false;
 
-
-// ======================================
-// LOAD QUESTION
-// ======================================
-
+// Load Question
 function loadQuestion() {
-
     answered = false;
 
     const currentQuiz = quizData[currentQuestion];
 
-    // Question
     questionEl.textContent = currentQuiz.question;
-
-    // Category
     categoryEl.textContent = currentQuiz.category;
 
-    // Question Counter
     questionCountEl.textContent =
         `${String(currentQuestion + 1).padStart(2, "0")} / ${quizData.length}`;
 
-    // Score
     scoreEl.textContent = score;
 
-    // Progress
     const progress = ((currentQuestion + 1) / quizData.length) * 100;
     progressEl.style.width = `${progress}%`;
 
-    // Clear Previous Options
     optionsEl.innerHTML = "";
 
-    // Reset Answer Status
     answerStatus.textContent = "Select an answer to continue";
     answerStatus.className = "";
 
-    // Disable Next Button for New Question
     nextBtn.disabled = true;
 
-    // Reset button appearance
-    nextBtn.style.opacity = "0.4";
-    nextBtn.style.cursor = "not-allowed";
-
-    // Button Text
     nextBtn.innerHTML = currentQuestion === quizData.length - 1
         ? 'Finish Quiz <span>→</span>'
         : 'Next Question <span>→</span>';
 
-    // Create Options
     currentQuiz.options.forEach((option, index) => {
-
         const button = document.createElement("button");
 
         button.type = "button";
@@ -338,18 +234,23 @@ function loadQuestion() {
         button.appendChild(letter);
         button.appendChild(optionText);
 
-        button.addEventListener("click", function () {
+        button.addEventListener("click", () => {
+            checkAnswer(button, option, currentQuiz.answer);
+        });
 
-            checkAnswer(button, option, currentfunction checkAnswer(selectedBtn, selectedAnswer, correctAnswer) {
+        optionsEl.appendChild(button);
+    });
+}
 
+// Check Answer
+function checkAnswer(selectedBtn, selectedAnswer, correctAnswer) {
     if (answered) return;
 
     answered = true;
 
-    const allOptions = document.querySelectorAll(".option");
+    const allOptions = optionsEl.querySelectorAll(".option");
 
     allOptions.forEach(button => {
-
         button.disabled = true;
 
         const optionText = button.lastElementChild.textContent;
@@ -357,152 +258,76 @@ function loadQuestion() {
         if (optionText === correctAnswer) {
             button.classList.add("correct");
         }
-
     });
 
     if (selectedAnswer === correctAnswer) {
-
         score++;
 
         selectedBtn.classList.add("selected");
 
         answerStatus.textContent = "✓ Correct Answer!";
-
         answerStatus.className = "correct-text";
-
     } else {
-
         selectedBtn.classList.add("wrong");
 
         answerStatus.textContent = "✗ Wrong Answer!";
-
         answerStatus.className = "wrong-text";
-
     }
 
     scoreEl.textContent = score;
 
-    // Force enable button
-    nextBtn.removeAttribute("disabled");
+    // Enable Next Question
     nextBtn.disabled = false;
-
-    console.log("Button enabled:", !nextBtn.disabled);
-
-                }Quiz.answer);
-
-        });
-
-        optionsEl.appendChild(button);
-
-    });
-
 }
 
-
-// ======================================
-// CHECK ANSWER
-// ======================================
-
-
-
-
-// ======================================
-// NEXT QUESTION
-// ======================================
-
-nextBtn.addEventListener("click", function () {
-
+// Next Question
+nextBtn.addEventListener("click", () => {
     if (!answered) return;
 
-    currentQuestion++;
-
-    if (currentQuestion < quizData.length) {
-
+    if (currentQuestion < quizData.length - 1) {
+        currentQuestion++;
         loadQuestion();
-
     } else {
-
         showResult();
-
     }
-
 });
 
-
-// ======================================
-// SHOW RESULT
-// ======================================
-
+// Show Result
 function showResult() {
-
     quizSection.classList.add("hidden");
-
     resultSection.classList.remove("hidden");
 
     const total = quizData.length;
-
     const wrong = total - score;
-
     const percentage = Math.round((score / total) * 100);
 
-    // Display Score
     finalScoreEl.textContent = `${score}/${total}`;
-
     correctCountEl.textContent = score;
-
     wrongCountEl.textContent = wrong;
-
     percentageEl.textContent = `${percentage}%`;
 
-    // Result Message
     if (percentage >= 80) {
-
-        resultMessageEl.textContent =
-            "Excellent! You are a Quiz Champion! 🏆";
-
+        resultMessageEl.textContent = "Excellent! You are a Quiz Champion! 🏆";
     } else if (percentage >= 60) {
-
-        resultMessageEl.textContent =
-            "Great Job! Keep Learning! 🎉";
-
+        resultMessageEl.textContent = "Great Job! Keep Learning! 🎉";
     } else if (percentage >= 40) {
-
-        resultMessageEl.textContent =
-            "Good Try! Practice More! 💪";
-
+        resultMessageEl.textContent = "Good Try! Practice More! 💪";
     } else {
-
-        resultMessageEl.textContent =
-            "Keep Practicing! You Can Do It! 🚀";
-
+        resultMessageEl.textContent = "Keep Practicing! You Can Do It! 🚀";
     }
-
 }
 
-
-// ======================================
-// RESTART QUIZ
-// ======================================
-
-restartBtn.addEventListener("click", function () {
-
+// Restart Quiz
+restartBtn.addEventListener("click", () => {
     currentQuestion = 0;
-
     score = 0;
-
     answered = false;
 
     resultSection.classList.add("hidden");
-
     quizSection.classList.remove("hidden");
 
     loadQuestion();
-
 });
 
-
-// ======================================
-// START QUIZ
-// ======================================
-
+// Start Quiz
 loadQuestion();
