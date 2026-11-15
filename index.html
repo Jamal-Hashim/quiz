@@ -1,13 +1,10 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>JavaScript Quiz App</title>
-
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -15,23 +12,19 @@
 
     <div class="quiz-container">
 
-        <!-- Header -->
         <div class="quiz-header">
             <div class="logo">
                 <span class="logo-icon">Q</span>
                 <span>QuizMaster</span>
             </div>
-
             <span class="quiz-category">WEB DEVELOPMENT</span>
         </div>
 
-        <!-- Quiz Intro -->
         <div class="quiz-intro">
             <h1>JavaScript Quiz</h1>
             <p>Test your knowledge of HTML, CSS & JavaScript.</p>
         </div>
 
-        <!-- Quiz Information -->
         <div class="quiz-info">
             <div>
                 <span class="info-label">QUESTION</span>
@@ -44,21 +37,16 @@
             </div>
         </div>
 
-        <!-- Progress Bar -->
         <div class="progress-container">
             <div class="progress-bar">
                 <div id="progress" class="progress"></div>
             </div>
         </div>
 
-        <!-- Quiz Section -->
         <div id="quiz">
 
             <div class="question-header">
-                <span class="question-tag" id="question-category">
-                    HTML
-                </span>
-
+                <span class="question-tag" id="question-category">HTML</span>
                 <span class="question-label">Choose the correct answer</span>
             </div>
 
@@ -67,19 +55,15 @@
             <div id="options"></div>
 
             <div class="quiz-footer">
-
                 <p id="answer-status">Select an answer to continue</p>
 
-                <button id="nextbtn" type="button">
-    Next Question
-    <span>→</span>
+                <button id="nextbtn" type="button" disabled>
+                    Next Question <span>→</span>
                 </button>
-
             </div>
 
         </div>
 
-        <!-- Result Section -->
         <div id="result-section" class="result-section hidden">
 
             <div class="result-icon">🏆</div>
@@ -114,13 +98,12 @@
                 </div>
             </div>
 
-            <button id="restart-btn">
+            <button id="restart-btn" type="button">
                 ↻ Restart Quiz
             </button>
 
         </div>
 
-        <!-- Footer -->
         <div class="quiz-bottom">
             <span>Made with ❤️ for Developers</span>
             <span>QuizMaster © 2026</span>
@@ -131,5 +114,4 @@
     <script src="index.js"></script>
 
 </body>
-
 </html>
