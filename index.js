@@ -1,4 +1,4 @@
-
+console.log("JavaScript Connected Successfully!");
 const quizData = [
     // HTML Questions
     {
